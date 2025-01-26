@@ -1,12 +1,26 @@
+using System;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 10f;
     public float laneWidth = 2f;
-    public float boundaryLimit = 3f;
+    public float boundaryLimit = 2f;
 
     private float targetXPosition;
+    
+    [SerializeField] private Animator animator;
+    [SerializeField] private GameController gameController;
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Obstacle"))
+        {
+            animator.SetTrigger("Die");
+            gameController.isGameActive = false;
+            gameController.DestroyObstacles();
+        }
+    }
 
     void Start()
     {
