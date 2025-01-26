@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class GameController : MonoBehaviour
 {
     [SerializeField] private GameObject youLostPanel;
+    [SerializeField] private GameObject youWinPanel;
     [SerializeField] private Button loseButton;
     [SerializeField] private Button winButton;
     
@@ -22,7 +23,7 @@ public class GameController : MonoBehaviour
         StartCoroutine(SpawnObstaclesRoutine());
     }
 
-    private void ShowYouLostPanel()
+    public void ShowYouLostPanel()
     {
         youLostPanel.SetActive(true);
     }

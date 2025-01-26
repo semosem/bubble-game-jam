@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,6 +13,7 @@ public class PlayerController : MonoBehaviour
     
     [SerializeField] private Animator animator;
     [SerializeField] private GameController gameController;
+    [SerializeField] private Factory factory;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -19,9 +22,24 @@ public class PlayerController : MonoBehaviour
             animator.SetTrigger("Die");
             gameController.isGameActive = false;
             gameController.DestroyObstacles();
+            gameController.ShowYouLostPanel();
+            factory.Move = false;
+            
+            Invoke("GoToMenu", 10);
         }
     }
 
+    private IEnumerator GoToMenu()
+    {
+        yield return new WaitForSeconds(2);
+        
+        gameController.ShowYouLostPanel();
+        
+        yield return new WaitForSeconds(2);
+        
+        SceneManager.LoadSceneAsync(0);
+    }
+    
     void Start()
     {
         targetXPosition = transform.position.x;
