@@ -1,7 +1,7 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class StorySwitch : MonoBehaviour
 {
